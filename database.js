@@ -76,6 +76,8 @@ submitButton.addEventListener("click", () => {
         let newImageCell = document.createElement("td")
         const img = document.createElement("img")
         img.src = src;
+        img.width = "64p"
+        img.height = "64p"
         newImageCell.appendChild(img)
         tr.appendChild(newImageCell)
     }
@@ -104,7 +106,7 @@ emptyTableButton.addEventListener("click", () => {
 //returns the corresponding letter depending on whether the @param boolean is true of false
 function isAdmin(boolean){
     if(boolean){
-        return "A"
+        return "X"
     }
     else return "-"
 }
