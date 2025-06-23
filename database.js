@@ -24,41 +24,67 @@ submitButton.addEventListener("click", () => {
 
     //check if username already exists
     if(usernames.includes(person.username)){
-       console.log("This username already exists..") 
+        console.log("This username already exists.") 
 
         //note: I discovered the .children method at https://stackoverflow.com/questions/61268190/change-table-tr-elements-using-js
-       
-        /*tbody.children[usernames.indexOf(person.username)].children[1].innerText = person.email
-       tbody.children[usernames.indexOf(person.username)].children[2].innerText = person.admin
-       tbody.children[usernames.indexOf(person.username)].children[3].innerText = person.file
-        */
-        //shorter way to do the same:
+        tbody.children[usernames.indexOf(person.username)].children[1].innerText = person.email
+        tbody.children[usernames.indexOf(person.username)].children[2].innerText = person.admin
+        tbody.children[usernames.indexOf(person.username)].children[3].firstChild.src = URL.createObjectURL(person.file);
+
+        //shorter way to do the almost the same:
+        /*
         let i = 0;
         Object.keys(person).forEach(key => {
             tbody.children[usernames.indexOf(person.username)].children[i++].innerText = person[key]
-       
         })
-
-        console.log("Submitting data: Username: " + person.username+ ", Email: " + person.email + ", Admin: " + person.admin + " , Image: " + person?.file)
-
+        */
         return
         }
+
 
 
     let tr = document.createElement("tr")
 
     //iterate through the properties of person object, adding each property value to the table as a cell
     Object.keys(person).forEach(key => {
-        let newCell = document.createElement("td")
-        newCell.innerText = person[key];
-        console.log(key + ": " + person[key])
-        tr.appendChild(newCell)
+        if(person[key] != person.file){
+            let newCell = document.createElement("td")
+            newCell.innerText = person[key];
+            console.log(key + ": " + person[key])
+            tr.appendChild(newCell)
+        }
     })
+
+    let src = "Picture1.jpg"
+    console.log("file:", person.file);
+    if(person.file){
+        src = URL.createObjectURL(person.file);
+        console.log("URL: " + src)
+
+        //add the uploaded image into a cell of the table
+        let newImageCell = document.createElement("td")
+        const img = document.createElement("img")
+        img.src = src;
+        newImageCell.appendChild(img)
+        tr.appendChild(newImageCell)
+    }else{
+        console.log("No file was uploaded.")
+        console.log("URL: " + src)
+
+        //add the uploaded image into a cell of the table
+        let newImageCell = document.createElement("td")
+        const img = document.createElement("img")
+        img.src = src;
+        newImageCell.appendChild(img)
+        tr.appendChild(newImageCell)
+    }
+    console.log("Submitting data: Username: " + person.username + ", Email: " + person.email + ", Admin: " + person.admin + " , Image: " + src)
+
+
     usernames.push(person.username)
 
-    tbody.appendChild(tr)
-    console.log("Submitting data: Username: " + person.username+ ", Email: " + person.email + ", Admin: " + person.admin + " , Image: " + person?.file)
 
+    tbody.appendChild(tr)
 
 })
 
@@ -70,7 +96,7 @@ emptyTableButton.addEventListener("click", () => {
     }
 
     //reset variables
-    let usernames = []
+    usernames = []
     console.log("Usernames after reset: " + usernames)
 })
 
