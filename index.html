@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="database.js"></script>
     <title>Database Table Form</title>
 </head>
 <body>
@@ -19,13 +18,27 @@
     <button id="submit-data">Submit data</button><br>
     
     <table id="table">
-        <thead>Username</thead>
-        <thead>Email</thead>
-        <thead>Admin</thead>
-        <thead>Image</thead>
+
+        <thead>
+            <tr>
+            <th id="col-username">Username</th>
+            <th id="col-email">Email</th>
+            <th id="col-admin">Admin</th>
+            <th id="col-image">Image</th>
+        </tr>
+        </thead>
+
+        <tbody id="tbody">
+            
+        </tbody>
+
+    
     </table>
 
     <button id="empty-table">Empty table</button>
 
+
+
+    <script src="database.js"></script>
 </body>
 </html>
