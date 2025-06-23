@@ -19,8 +19,6 @@ submitButton.addEventListener("click", () => {
         file: document.getElementById("input-image").files[0]
     }
 
-    console.log("Submitting data: Username: " + person.username+ ", Email: " + person.email + ", Admin: " + person.admin + " , Image: " + person?.file)
-
     //if no username was entered, the submitted data is not saved
     if(!person.username) return
 
@@ -28,8 +26,6 @@ submitButton.addEventListener("click", () => {
     if(usernames.includes(person.username)){
        console.log("This username already exists..") 
 
-        console.log("Before: " + tbody.children[usernames.indexOf(person.username)].children[1].innerText)
-        
         //note: I discovered the .children method at https://stackoverflow.com/questions/61268190/change-table-tr-elements-using-js
        
         /*tbody.children[usernames.indexOf(person.username)].children[1].innerText = person.email
@@ -43,11 +39,10 @@ submitButton.addEventListener("click", () => {
        
         })
 
-
-       console.log("After: " + tbody.children[usernames.indexOf(person.username)].children[1].innerText)
+        console.log("Submitting data: Username: " + person.username+ ", Email: " + person.email + ", Admin: " + person.admin + " , Image: " + person?.file)
 
         return
-    }
+        }
 
 
     let tr = document.createElement("tr")
@@ -62,19 +57,20 @@ submitButton.addEventListener("click", () => {
     usernames.push(person.username)
 
     tbody.appendChild(tr)
-    rows.push(person)
+    console.log("Submitting data: Username: " + person.username+ ", Email: " + person.email + ", Admin: " + person.admin + " , Image: " + person?.file)
+
 
 })
 
 emptyTableButton.addEventListener("click", () => {
 
-    //remove all rows from the table
-    while(tbody.hasChildNodes){
-        tbody.removeChild(tbody.lastChild)
+    //remove all rows from the table. I used AI to figure out the right syntax
+    while(tbody.lastElementChild){
+        tbody.removeChild(tbody.lastElementChild)
     }
 
     //reset variables
-    usernames = []
+    let usernames = []
     console.log("Usernames after reset: " + usernames)
 })
 
