@@ -29,8 +29,9 @@ submitButton.addEventListener("click", () => {
         //note: I discovered the .children method at https://stackoverflow.com/questions/61268190/change-table-tr-elements-using-js
         tbody.children[usernames.indexOf(person.username)].children[1].innerText = person.email
         tbody.children[usernames.indexOf(person.username)].children[2].innerText = person.admin
-        tbody.children[usernames.indexOf(person.username)].children[3].firstChild.src = URL.createObjectURL(person.file);
-
+        if(person.file){
+            tbody.children[usernames.indexOf(person.username)].children[3].firstChild.src = URL.createObjectURL(person.file);
+        }
         //shorter way to do the almost the same:
         /*
         let i = 0;
@@ -55,7 +56,7 @@ submitButton.addEventListener("click", () => {
         }
     })
 
-    let src = "Picture1.jpg"
+    let src = ""
     console.log("file:", person.file);
     if(person.file){
         src = URL.createObjectURL(person.file);
